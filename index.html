@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coop · Portfolio Vol. 01</title>
+<meta name="description" content="Portfolio of Coop, SIAT graduate from SFU: UX design, app development, sound design and machine learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Covered+By+Your+Grace&family=Jost:wght@400;500&family=Sedgwick+Ave+Display&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a skate-video credits page by someone who also ships apps. Loose by hand, tight in the details.
+   IDEA: the portfolio is a photocopied skate video: a collage cover, a print ad, "parts" for each project, contact sheets marked in grease pencil.
+   PICTURE: a vertical hand-tagged name beside a pasted-up photocopy collage that settles as you move.
+   COLOUR and TYPE: photocopy greys and ink, one cobalt duotone, grease-pencil red only for marks; Sedgwick tag, Covered By Your Grace credits, Jost ad wordmark, Archivo, Space Mono.
+   LAYOUT: cover, ticker, print ad, video parts, case spreads, polaroid wall, poster, sprayed contact. */
+:root{color-scheme:light;
+  --paper:#e9e7e2;--paper2:#f5f4f0;--ink:#111;--g1:#2a2a29;--g2:#6e6d69;--g3:#b9b7b1;--g4:#d6d4ce;
+  --cob:#1f33c4;--cobl:#ccd3f6;--grease:#d0372c;
+  --dots:radial-gradient(rgba(0,0,0,.2) 1px,transparent 1.4px);
+  --ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;min-width:0}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:60px}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Archivo,Helvetica,Arial,sans-serif;overflow-x:clip}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:70;opacity:.24;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .85 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--cob);outline-offset:4px}
+.wrap{max-width:1300px;margin:0 auto;padding:0 max(4.5vw,18px)}
+.mono{font:400 11.5px/1.6 "Space Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.04em}
+.tag{font-family:"Sedgwick Ave Display",cursive;font-weight:400;line-height:.85}
+.hand{font-family:"Covered By Your Grace",cursive;text-transform:uppercase;line-height:1.12}
+h1,h2,h3{margin:0;font-weight:900;line-height:.95}
+
+/* photo placeholders: photocopy and cobalt duotone; real <img> inside gets the same treatment */
+.ph{position:relative;overflow:hidden;display:grid;place-items:center;background-color:var(--g3);
+  background-image:var(--dots),linear-gradient(90deg,transparent 0 22%,rgba(0,0,0,.06) 22% 23%,transparent 23% 64%,rgba(255,255,255,.18) 64% 66%,transparent 66%),linear-gradient(170deg,rgba(255,255,255,.35),transparent 45%,rgba(0,0,0,.22));
+  background-size:4px 4px,100% 100%,100% 100%}
+.ph.dk{background-color:#3a3937;background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.4px),linear-gradient(170deg,rgba(255,255,255,.12),transparent 50%,rgba(0,0,0,.4));background-size:4px 4px,100% 100%}
+.ph.cob{background-color:var(--cobl);background-image:repeating-radial-gradient(circle at 32% 42%,rgba(31,51,196,.5) 0 1.1px,transparent 1.2px 5px),repeating-linear-gradient(118deg,rgba(31,51,196,.22) 0 1px,transparent 1px 4px);background-size:auto;outline:1.5px solid var(--cob);outline-offset:-1.5px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.25) brightness(1.04)}
+.ph.cob img{mix-blend-mode:multiply}
+.ph.cob:has(img)::after{content:"";position:absolute;inset:0;background:var(--cob);mix-blend-mode:screen}
+.lbl{position:relative;z-index:1;font:400 10.5px/1.4 "Space Mono",monospace;text-transform:uppercase;background:var(--paper2);color:var(--ink);padding:4px 8px;text-align:center;max-width:86%}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--ink)}
+.top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;min-height:54px}
+.top .tag{font-size:30px;text-decoration:none;justify-self:start;padding-top:4px}
+.top nav{display:flex;gap:4px 22px;flex-wrap:wrap;justify-content:center}
+.top nav a{text-decoration:none;padding:8px 0;position:relative}
+.top nav a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:var(--cob);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.top nav a:hover::after{transform:none}
+.top .r{text-align:right}
+
+/* cover */
+.cover{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:clamp(20px,3vw,44px);padding-top:clamp(24px,3vw,40px);padding-bottom:clamp(36px,4vw,56px)}
+.left{display:flex;flex-direction:column;gap:22px}
+.vtag{writing-mode:vertical-rl;font-size:clamp(150px,15vw,230px);margin:-6px 0 0 -10px;clip-path:inset(0 0 100% 0);transition:clip-path 1.8s var(--ease) .15s}
+.ready .vtag{clip-path:inset(-10% -10% -10% -10%)}
+.by{font-size:20px;margin:0}
+.cast{list-style:none;margin:0;padding:0;font-size:clamp(22px,2vw,27px)}
+.cast li{opacity:0;transform:translateX(-10px);transition:.7s var(--ease)}
+.ready .cast li{opacity:1;transform:none}
+.cast a{text-decoration:none;background:linear-gradient(var(--cob),var(--cob)) 0 92%/0 3px no-repeat;transition:background-size .45s var(--ease)}
+.cast a:hover{background-size:100% 3px}
+.cast small{font-size:.62em;margin-right:4px}
+.sig{display:flex;align-items:flex-end;gap:14px;margin-top:auto}
+.sig .tag{font-size:46px}
+.collage{position:relative;height:min(86svh,880px);min-height:540px}
+.piece{position:absolute;border:3px solid var(--paper2);box-shadow:0 10px 24px -14px rgba(0,0,0,.6);opacity:0;transform:rotate(var(--r)) scale(1.12);transition:opacity .5s ease var(--d),transform .9s var(--ease) var(--d),translate .25s linear}
+.ready .piece{opacity:1;transform:rotate(var(--r))}
+.piece:hover{z-index:9}
+.note-me{position:absolute;right:-6px;bottom:-8px;z-index:12;font-size:24px;color:var(--grease);transform:rotate(-6deg);display:flex;align-items:center;gap:6px;pointer-events:none}
+
+/* ticker */
+.ticker{background:var(--cob);color:var(--paper2);overflow:hidden}
+.ticker div{display:flex;width:max-content;animation:tick 38s linear infinite}
+.ticker span{font-size:clamp(20px,2vw,26px);padding:12px 18px 10px;white-space:nowrap}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* print ad */
+.ad{position:relative;height:clamp(560px,92svh,980px);overflow:hidden;border-bottom:1px solid var(--ink)}
+.ad .ph{position:absolute;inset:-6%;will-change:transform}
+.ad .ph .lbl{position:absolute;left:6%;top:10%}
+.ad .word{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;color:var(--ink);z-index:2}
+.ad .word b{display:block;font:400 clamp(56px,9vw,128px)/1 Jost,sans-serif;letter-spacing:-.01em}
+.ad .word span{font:400 clamp(20px,2.4vw,32px)/1.2 Jost,sans-serif}
+.ad .addr{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:400 clamp(13px,1.3vw,17px) Jost,sans-serif;z-index:2;letter-spacing:.02em}
+
+/* parts index */
+.sec{padding:clamp(70px,9vw,130px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:clamp(36px,5vw,64px);flex-wrap:wrap}
+.sec-head .tag{font-size:clamp(64px,9vw,128px)}
+.part{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding:clamp(28px,4vw,48px) 0;border-bottom:1px solid var(--g3);text-decoration:none}
+.part:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.part:nth-child(even) .stack{order:2}
+.stack{position:relative;aspect-ratio:5/4}
+.stack .ph{position:absolute;transition:transform 1s var(--ease),opacity .8s}
+.stack .ph:nth-child(1){left:6%;top:0;width:80%;height:40%}
+.stack .ph:nth-child(2){left:0;top:30%;width:58%;height:36%;z-index:2}
+.stack .ph:nth-child(3){left:38%;top:42%;width:58%;height:30%;z-index:3}
+.stack .ph:nth-child(4){left:10%;top:66%;width:84%;height:34%;z-index:1}
+.stack.rv .ph{opacity:0}
+.stack.rv .ph:nth-child(odd){transform:translateX(-60px)}.stack.rv .ph:nth-child(even){transform:translateX(60px)}
+.stack.in .ph{opacity:1;transform:none}
+.stack.in .ph:nth-child(2){transition-delay:.1s}.stack.in .ph:nth-child(3){transition-delay:.2s}.stack.in .ph:nth-child(4){transition-delay:.3s}
+.part:hover .stack .ph:nth-child(3){transform:translate(10px,-8px)}
+.part:hover .stack .ph:nth-child(2){transform:translate(-8px,6px)}
+.part .hand.no{font-size:24px;color:var(--cob)}
+.part .tag.t{display:block;font-size:clamp(60px,7.5vw,112px);margin:6px 0 14px}
+.part p{margin:0 0 16px;max-width:46ch}
+.starring{font-size:21px;margin:0 0 18px}
+.go{display:inline-flex;gap:10px;align-items:center;border:1.5px solid var(--ink);padding:10px 16px;transition:background .3s,color .3s}
+.part:hover .go{background:var(--ink);color:var(--paper2)}
+
+/* case spreads */
+.case{padding:clamp(70px,9vw,130px) 0;border-top:1px solid var(--ink)}
+.case-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);align-items:end}
+.case-top .tag{font-size:clamp(84px,12vw,190px);display:block;transform:rotate(-3deg);transform-origin:left bottom;margin-bottom:10px}
+.case-top .hand.no{font-size:26px;color:var(--cob)}
+.credits{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;font-size:21px;align-content:end}
+.credits dt{color:var(--g2);font-size:.75em;padding-top:3px}
+.credits dd{margin:0}
+.collage2{position:relative;height:clamp(380px,46vw,620px);margin:clamp(32px,4vw,56px) 0}
+.collage2 .ph{position:absolute;border:3px solid var(--paper2);box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}
+.body2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px)}
+.body2 p{margin:6px 0 0;font-size:15.5px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:clamp(48px,6vw,80px) 0;border-block:1px solid var(--ink)}
+.stats div{padding:22px clamp(12px,2vw,24px);border-left:1px solid var(--ink)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font:900 clamp(48px,7vw,104px)/.9 Archivo,sans-serif;letter-spacing:-.04em;white-space:nowrap}
+.stats span{display:block;font-size:20px;margin-top:8px}
+.sheet{background:#141414;color:var(--paper);padding:clamp(16px,2.4vw,30px);margin-bottom:clamp(48px,6vw,80px)}
+.sheet-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;opacity:.8}
+.film{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.2vw,16px)}
+.film figure{margin:0;position:relative}
+.film .ph{aspect-ratio:4/5;border:0}
+.film figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;opacity:.75}
+.circle{position:absolute;inset:-12% -14%;pointer-events:none;z-index:3;overflow:visible}
+.circle path{fill:none;stroke:var(--grease);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s var(--ease) .4s}
+.in .circle path{stroke-dashoffset:0}
+.pick{position:absolute;right:-6px;top:-30px;z-index:4;color:var(--grease);font-size:24px;transform:rotate(6deg)}
+.pd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,5vw,72px)}
+.pd h3{font:400 clamp(44px,5vw,70px)/.9 "Sedgwick Ave Display",cursive;margin-bottom:22px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px}
+.steps .hand{font-size:34px;color:var(--cob);line-height:1}
+.steps b{display:block;font-weight:900;text-transform:uppercase;font-size:14px;letter-spacing:.03em}
+.steps p{margin:2px 0 0;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px}
+.card{position:relative;background:var(--paper2);padding:20px 18px 16px;box-shadow:0 8px 18px -12px rgba(0,0,0,.5);font-size:15px;line-height:1.45;transition:transform .45s var(--ease)}
+.card::before{content:"";position:absolute;top:-10px;left:50%;width:74px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(230,226,214,.85);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.card:nth-child(odd){transform:rotate(-1.2deg)}.card:nth-child(even){transform:rotate(1deg)}
+.card:nth-child(3){background:var(--cob);color:var(--paper2)}
+.card:hover{transform:rotate(0) translateY(-4px)}
+.card b{display:block;font:400 23px/1.05 "Covered By Your Grace",cursive;text-transform:uppercase;margin-bottom:6px}
+.result{margin-top:clamp(56px,7vw,96px);text-align:center;position:relative}
+.result .tag{font-size:clamp(54px,6vw,86px);color:var(--cob);display:inline-block;transform:rotate(-4deg);margin-bottom:6px}
+.result p{font:400 clamp(22px,2.6vw,36px)/1.25 Jost,sans-serif;max-width:30ch;margin:0 auto 14px}
+.result .hand{font-size:21px;color:var(--g2)}
+
+/* polaroid wall */
+.wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(30px,6vw,90px);padding:20px clamp(0px,3vw,40px)}
+.pola{position:relative;background:#fbfaf7;padding:14px 14px 0;box-shadow:0 18px 34px -16px rgba(0,0,0,.5);transition:transform .7s var(--ease)}
+.pola:nth-child(1){--r:-3deg}.pola:nth-child(2){--r:2.4deg;margin-top:40px}
+.pola,.pola.rv.in{transform:rotate(var(--r))}
+.pola:hover,.pola.rv.in:hover{transform:rotate(0) translateY(-8px)}
+.pola .ph{aspect-ratio:1}
+.pola .cap{padding:12px 4px 18px}
+.pola .tag{font-size:clamp(40px,4.4vw,60px);display:block}
+.pola p{margin:8px 0 0;font-size:15px}
+.pola::before{content:"";position:absolute;top:-13px;left:50%;width:110px;height:28px;transform:translateX(-50%) rotate(-2deg);background:rgba(204,211,246,.85);z-index:2}
+
+/* poster about */
+.poster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--paper2);border:1px solid var(--ink)}
+.poster .l{padding:clamp(24px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+.poster .tag{font-size:clamp(100px,13vw,200px);transform:rotate(-4deg);transform-origin:left;margin:4px 0 22px}
+.poster .hand.by{font-size:22px}
+.poster p{margin:0 0 14px;max-width:46ch}
+.poster .ph{min-height:clamp(440px,54vw,760px)}
+.roll{grid-column:1/-1;border-top:1px solid var(--ink);padding:16px clamp(24px,4vw,56px) 20px;font-size:21px;display:flex;flex-wrap:wrap;gap:4px 24px;justify-content:space-between}
+
+/* contact */
+.contact{position:relative;background:#121212;color:var(--paper2);overflow:hidden}
+.contact>.ph{position:absolute;inset:0}
+.contact>.ph .lbl{position:absolute;right:18px;top:18px;background:transparent;color:#999;border:1px solid #555}
+.contact .wrap{position:relative;padding-top:clamp(110px,14vw,210px);padding-bottom:clamp(60px,8vw,110px)}
+.contact .tag{display:block;font-size:clamp(96px,17vw,260px);color:#fff;transform:rotate(-5deg);margin-bottom:clamp(20px,3vw,40px);clip-path:inset(-20% 100% -20% 0);transition:clip-path 1.6s var(--ease)}
+.contact .tag.in{clip-path:inset(-20% -10% -20% 0)}
+.contact .hand{font-size:clamp(22px,2.4vw,30px);margin:0 0 18px}
+.mail{display:inline-block;font:500 clamp(22px,3vw,40px) Jost,sans-serif;color:#fff;text-decoration:none;border-bottom:2px solid #fff;padding-bottom:4px;user-select:all;transition:color .3s,border-color .3s}
+.mail:hover{color:var(--cobl);border-color:var(--cobl)}
+.links{display:flex;gap:8px 26px;flex-wrap:wrap;margin-top:28px}
+.links a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+.links a:hover{border-color:currentColor}
+footer .wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;min-height:56px}
+footer .r{text-align:right}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:1000px){.cover{grid-template-columns:minmax(0,1fr)}.vtag{writing-mode:horizontal-tb;font-size:clamp(110px,24vw,200px);margin:0}.left{gap:14px}.sig{display:none}.collage{height:118vw;min-height:0;max-height:900px}
+  .part,.part:nth-child(even){grid-template-columns:minmax(0,1fr)}.part:nth-child(even) .stack{order:0}.case-top,.pd,.poster{grid-template-columns:minmax(0,1fr)}.body2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.film{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.top .wrap{grid-template-columns:auto 1fr}.top nav{justify-content:flex-end;gap:4px 14px}.top .r{display:none}.body2,.cards,.wall{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:minmax(0,1fr)}.stats div{border-left:0;border-top:1px solid var(--ink)}.stats div:first-child{border-top:0}.pola:nth-child(2){margin-top:0}.collage2{height:110vw}.note-me{display:none}footer .wrap{grid-template-columns:1fr 1fr}footer .mid{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker div{animation:none}*{transition:none!important}.rv,.stack.rv .ph,.piece,.cast li{opacity:1;transform:none}.piece{transform:rotate(var(--r))}.vtag,.contact .tag{clip-path:none}.circle path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<header class="top mono">
+  <div class="wrap">
+    <a class="tag" href="#top" aria-label="Coop, back to top">Coop</a>
+    <nav aria-label="Main"><a href="#parts">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <span class="r">Vol. 01 · 2026</span>
+  </div>
+</header>
+
+<main id="top">
+<!-- COVER -->
+<section class="wrap cover">
+  <div class="left">
+    <h1 class="tag vtag">Coop</h1>
+    <p class="hand by">A short portfolio<br>by Coop · SIAT, SFU '26</p>
+    <ul class="cast hand" aria-label="Projects">
+      <li style="transition-delay:.5s"><a href="#eco-quest">Eco Quest</a></li>
+      <li style="transition-delay:.6s"><a href="#value-studio">Value Studio</a></li>
+      <li style="transition-delay:.7s"><a href="#unreal">Unreal World</a></li>
+      <li style="transition-delay:.8s"><a href="#road-signs">Road Signs</a></li>
+      <li style="transition-delay:.9s"><small>w/ special guest</small><br>Machine Learning</li>
+    </ul>
+    <div class="sig"><span class="tag">Coop</span><span class="mono">Design · Code<br>Sound · Models</span></div>
+  </div>
+  <div class="collage" id="collage" aria-label="Photo collage"></div>
+</section>
+
+<div class="ticker hand" aria-hidden="true"><div id="tk"></div></div>
+
+<!-- PRINT AD -->
+<section class="ad" aria-label="Print ad">
+  <div class="ph" id="adph"><span class="lbl">Full-bleed B/W photo of you or your crew</span></div>
+  <div class="word"><b>cōop</b><span>cultus lake, bc</span></div>
+  <p class="addr">siat · simon fraser university · class of ’26 · open to entry-level roles</p>
+</section>
+
+<!-- PARTS -->
+<section class="sec" id="parts"><div class="wrap">
+  <div class="sec-head rv"><h2 class="tag">The parts</h2><span class="mono">4 projects · 4 directions</span></div>
+
+  <a class="part" href="#eco-quest">
+    <div class="stack rv"><div class="ph cob"><span class="lbl">Eco Quest crop 1</span></div><div class="ph cob"></div><div class="ph cob"></div><div class="ph cob"></div></div>
+    <div class="rv">
+      <span class="hand no">Part one</span>
+      <span class="tag t">Eco Quest</span>
+      <p class="hand starring">Starring: UX research, React Native, Firebase</p>
+      <p>A gamified climate-action app that turns caring about the climate into three small quests a day.</p>
+      <span class="go mono">See the part</span>
+    </div>
+  </a>
+  <a class="part" href="#value-studio">
+    <div class="stack rv"><div class="ph"><span class="lbl">Value Studio crop 1</span></div><div class="ph"></div><div class="ph dk"></div><div class="ph"></div></div>
+    <div class="rv">
+      <span class="hand no">Part two</span>
+      <span class="tag t">Value Studio</span>
+      <p class="hand starring">Starring: Python, OpenCV, generative AI</p>
+      <p>A drawing-reference app that teaches beginners to see light and dark shapes instead of copying details.</p>
+      <span class="go mono">See the part</span>
+    </div>
+  </a>
+  <a class="part" href="#unreal">
+    <div class="stack rv"><div class="ph dk"><span class="lbl">Unreal crop 1</span></div><div class="ph dk"></div><div class="ph cob"></div><div class="ph dk"></div></div>
+    <div class="rv">
+      <span class="hand no">Part three</span>
+      <span class="tag t">Unreal World</span>
+      <p class="hand starring">Starring: sound design, prop placement</p>
+      <p>A full Unreal Engine environment where every sound and every placed prop is mine.</p>
+      <span class="go mono">See the part</span>
+    </div>
+  </a>
+  <a class="part" href="#road-signs">
+    <div class="stack rv"><div class="ph"><span class="lbl">Road signs crop 1</span></div><div class="ph cob"></div><div class="ph"></div><div class="ph cob"></div></div>
+    <div class="rv">
+      <span class="hand no">Part four</span>
+      <span class="tag t">Road Signs</span>
+      <p class="hand starring">Starring: machine learning, testing</p>
+      <p>A classifier trained on Canadian road signs, tested on European ones, and fixed where it broke.</p>
+      <span class="go mono">See the part</span>
+    </div>
+  </a>
+</div></section>
+
+<!-- ECO QUEST -->
+<section class="case" id="eco-quest"><div class="wrap">
+  <div class="case-top">
+    <div class="rv"><span class="hand no">Part one · IAT 351</span><span class="tag">Eco Quest</span></div>
+    <dl class="credits hand rv">
+      <dt>Directed by</dt><dd>Coop</dd>
+      <dt>Role</dt><dd>Sole UX designer + developer</dd>
+      <dt>Course</dt><dd>IAT 351, Human-Computer Interaction</dd>
+      <dt>Tools</dt><dd>Figma, React Native, Expo, Firebase, VS Code</dd>
+    </dl>
+  </div>
+  <div class="collage2 rv" data-c="eco"></div>
+  <div class="body2 rv">
+    <div><span class="mono">The problem</span><p>Students care about climate change but rarely act on it day to day. The problem feels too big, and most climate apps that use points and feedback have never been tested.</p></div>
+    <div><span class="mono">The idea</span><p>Make climate action small, social and doable: three quests a day (easy, medium, hard), a community feed, awards and fair rankings.</p></div>
+    <div><span class="mono">The build</span><p>A fully working iOS and Android app, designed from HCI research and checked against my own design rationale.</p></div>
+  </div>
+  <div class="stats rv">
+    <div><b>19</b><span class="hand">Screens designed + built</span></div>
+    <div><b>75</b><span class="hand">Quests across 7 areas</span></div>
+    <div><b>14:1</b><span class="hand">Text contrast, up from 1.7:1</span></div>
+  </div>
+  <div class="sheet rv">
+    <div class="sheet-top mono"><span>Contact sheet · Eco Quest</span><span>Roll 01 · 8 frames</span></div>
+    <div class="film" data-film="Onboarding,Quest Hub,Swap,Complete,Community,Rankings,Profile,Before/after" data-pick="2" data-tint="cob"></div>
+  </div>
+  <div class="pd">
+    <div class="rv">
+      <h3>Process</h3>
+      <ol class="steps">
+        <li><span class="hand">1</span><div><b>Research</b><p>HCI literature on perception, motor control and cognition, plus studies on leaderboards, social visibility and motivation.</p></div></li>
+        <li><span class="hand">2</span><div><b>Proposal and feedback</b><p>I reworked the proposal after feedback to focus on what makes the app unique: its multi-user community.</p></div></li>
+        <li><span class="hand">3</span><div><b>Self-audit</b><p>I checked my first build against my own rationale and fixed four problems: low contrast, a mis-tap-prone swap button, hidden rankings, and difficulty shown only by colour.</p></div></li>
+        <li><span class="hand">4</span><div><b>Redesign</b><p>A full redesign with an original mascot system, then a test plan for performance, social use and long-term motivation.</p></div></li>
+      </ol>
+    </div>
+    <div class="rv">
+      <h3>Decisions</h3>
+      <div class="cards">
+        <div class="card"><b>Readable outdoors</b>Text contrast raised from 1.7:1 to 14:1 for the bus or between classes.</div>
+        <div class="card"><b>Never colour alone</b>Difficulty shown by label, icon and character for colour-blind users.</div>
+        <div class="card"><b>Taps that cost</b>Big, separated targets, with the points cost shown before you confirm.</div>
+        <div class="card"><b>Private by default</b>Location stripped from photos, a warning about faces and plates, optional sharing.</div>
+        <div class="card"><b>Fair comparison</b>Title-based leagues and reachable goals keep people near the bottom going.</div>
+        <div class="card"><b>Beyond points</b>The completion screen celebrates the action first, not the score.</div>
+      </div>
+    </div>
+  </div>
+  <div class="result rv">
+    <span class="tag">The result</span>
+    <p>A working iOS and Android app with 19 screens, 75 quests, a community feed, awards, rankings and offline support.</p>
+    <span class="hand">Final project · IAT 351</span>
+  </div>
+</div></section>
+
+<!-- VALUE STUDIO -->
+<section class="case" id="value-studio"><div class="wrap">
+  <div class="case-top">
+    <div class="rv"><span class="hand no">Part two · IAT 460</span><span class="tag">Value Studio</span></div>
+    <dl class="credits hand rv">
+      <dt>Directed by</dt><dd>Coop</dd>
+      <dt>Role</dt><dd>Solo: concept, design + scope</dd>
+      <dt>Course</dt><dd>IAT 460, Generative AI + Computational Creativity</dd>
+      <dt>Tools</dt><dd>Python, PyQt5, OpenCV, NumPy, ComfyUI</dd>
+    </dl>
+  </div>
+  <div class="collage2 rv" data-c="value"></div>
+  <div class="body2 rv">
+    <div><span class="mono">The problem</span><p>Beginners copy a photo's details instead of its light and dark shapes, so their drawings look flat. Good reference photos for a specific subject are also hard to find.</p></div>
+    <div><span class="mono">The idea</span><p>Break a reference into tones and reveal them layer by layer, in the order you'd actually draw them.</p></div>
+    <div><span class="mono">The build</span><p>A desktop app tested with experiments and unit tests. I cut a perspective grid and 3D room to focus on values.</p></div>
+  </div>
+  <div class="stats rv">
+    <div><b>~3×</b><span class="hand">Less tonal error than even steps (3 tones)</span></div>
+    <div><b>27</b><span class="hand">Passing unit tests</span></div>
+    <div><b>~20ms</b><span class="hand">To change a layer</span></div>
+  </div>
+  <div class="sheet rv">
+    <div class="sheet-top mono"><span>Contact sheet · Value Studio</span><span>Roll 02 · 8 frames</span></div>
+    <div class="film" data-film="Outline,Darkest,Mid tones,Full reveal,Drawing aids,Reference score,Practice Room,Blot breeder" data-pick="4"></div>
+  </div>
+  <div class="pd">
+    <div class="rv">
+      <h3>Process</h3>
+      <ol class="steps">
+        <li><span class="hand">1</span><div><b>Proposal</b><p>The first version included a perspective grid and a 3D room.</p></div></li>
+        <li><span class="hand">2</span><div><b>Refocus</b><p>I cut those for time and rebuilt the project around values, the light and dark shapes.</p></div></li>
+        <li><span class="hand">3</span><div><b>Trim</b><p>Three tabs and a Guide page, keeping only features tied to the course's techniques.</p></div></li>
+        <li><span class="hand">4</span><div><b>Test</b><p>I checked the algorithms with experiments and unit tests.</p></div></li>
+      </ol>
+    </div>
+    <div class="rv">
+      <h3>Decisions</h3>
+      <div class="cards">
+        <div class="card"><b>Genetic algorithm tones</b>Chosen over K-means, with less error than evenly spaced tones from 3 to 50 tones.</div>
+        <div class="card"><b>Layer by layer</b>A faint outline first, then the darkest shapes, the order you'd draw in.</div>
+        <div class="card"><b>Drawing aids</b>Upside-down view, a grid, and graphite, blue pen, sepia and midnight colourways.</div>
+        <div class="card"><b>Reference score</b>Tells you whether a photo will make a good drawing subject.</div>
+        <div class="card"><b>Practice Room</b>Ink blots, a blot breeder driven by your picks, cave maps and plants.</div>
+        <div class="card"><b>AI as a helper</b>Stable Diffusion only makes the reference photo. You do the drawing.</div>
+      </div>
+    </div>
+  </div>
+  <div class="result rv">
+    <span class="tag">The result</span>
+    <p>A working desktop app with 27 passing tests. The blot breeder's score rose from 0.52 to 0.79 as it learned from picks; random blots stayed near 0.5.</p>
+    <span class="hand">Concept, design and scope by me · built with AI coding help from Claude</span>
+  </div>
+</div></section>
+
+<!-- WALL -->
+<section class="case"><div class="wrap">
+  <div class="sec-head rv"><h2 class="tag">On the wall</h2><span class="mono">Parts three + four</span></div>
+  <div class="wall">
+    <article class="pola rv" id="unreal">
+      <div class="ph dk"><span class="lbl">Gameplay still or clip</span></div>
+      <div class="cap"><span class="tag">Unreal World</span><span class="mono">Sound design · Prop placement</span>
+        <p>I did the sound design and prop placement for the whole project, so every room you walk through has my audio and set dressing in it. The goal was a space that feels lived-in and sounds right as you move through it.</p></div>
+    </article>
+    <article class="pola rv" id="road-signs">
+      <div class="ph cob"><span class="lbl">Wrong guesses, before + after</span></div>
+      <div class="cap"><span class="tag">Road Signs</span><span class="mono">Machine learning · Testing</span>
+        <p>I trained an image classifier on Canadian road signs, then tested it on European signs it had never seen. I studied where it guessed wrong, worked out why, and made changes to improve its accuracy.</p></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- ABOUT -->
+<section class="sec" id="about" style="padding-top:clamp(30px,4vw,50px)"><div class="wrap">
+  <div class="poster rv">
+    <div class="l">
+      <span class="hand by">A portfolio by</span>
+      <span class="tag">coop</span>
+      <p>I graduated from SFU's School of Interactive Arts &amp; Technology with a BA and no concentration, which suited me. I moved between design, code, sound, 3D and AI, and every project went its own direction.</p>
+      <p>I'm happiest when I'm handed something I haven't done before and given time to learn it well. I'm looking for an entry-level role where I can be useful across a team.</p>
+      <p class="mono" style="margin-top:6px">Cultus Lake, BC · Fraser Valley, Metro Vancouver or remote</p>
+    </div>
+    <div class="ph"><span class="lbl">Your portrait, B/W</span></div>
+    <div class="roll hand"><span>UX research</span><span>Interaction design</span><span>Figma</span><span>React Native</span><span>Firebase</span><span>Python</span><span>OpenCV</span><span>ML</span><span>Unreal</span><span>Sound design</span></div>
+  </div>
+</div></section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="ph dk"><span class="lbl">Optional dark background photo</span></div>
+  <div class="wrap">
+    <span class="mono" style="opacity:.7">Contact · Open to entry-level roles</span>
+    <span class="tag" id="ct">Let's talk</span>
+    <p class="hand">Got a role, a weird project, or both? Hit me up.</p>
+    <a class="mail" href="mailto:coop@example.com">coop@example.com</a>
+    <div class="links mono"><a href="#">LinkedIn</a><a href="#">Resume (PDF)</a><a href="#top">Back to top</a></div>
+  </div>
+</section>
+<footer class="mono"><div class="wrap"><span>Coop · Vol. 01</span><span class="mid">Design · Code · Sound · Models</span><span class="r">Contact links are placeholders</span></div></footer>
+
+<script>
+{
+  /* cover collage: x,y,w,h in %, rotation, tone, label, depth */
+  const C=[
+    [0,0,42,30,-1.2,'','Photo 01 · you',6],[38,3,34,27,1.3,'cob','Photo 02',10],[69,0,31,35,-.8,'dk','Photo 03',4],
+    [5,27,31,31,1,'','Eco Quest',12],[32,27,39,37,-1.5,'','Photo 05 · candid',7],[69,33,31,29,1.1,'cob','Value Studio',11],
+    [1,57,36,25,-.7,'cob','Unreal still',9],[35,62,30,30,1.7,'dk','Road signs',5],[63,60,37,40,-1,'','Photo 09',8],[6,79,30,21,1,'','Sketchbook',13]
+  ];
+  const col=document.getElementById('collage');
+  col.innerHTML=C.map((p,i)=>`<div class="piece ph ${p[5]}" data-depth="${p[7]}" style="left:${p[0]}%;top:${p[1]}%;width:${p[2]}%;height:${p[3]}%;--r:${p[4]}deg;--d:${(.15+i*.09).toFixed(2)}s;z-index:${i+1}"><span class="lbl">${p[6]}</span></div>`).join('')+
+    `<span class="note-me hand">← swap in your photos</span>`;
+  /* case collages */
+  const C2={eco:[[0,6,46,70,-1.5,'cob','Hero: app mockup'],[40,0,30,52,1.2,'','Screen'],[64,10,36,60,-1,'cob','Screen'],[30,48,34,52,1.6,'dk','Process sketch']],
+            value:[[0,4,40,64,1.2,'','Reference photo'],[34,0,36,56,-1.4,'dk','Tonal layers'],[64,8,36,62,1,'','Drawing aids'],[22,48,40,52,-.8,'cob','Practice Room']]};
+  document.querySelectorAll('[data-c]').forEach(el=>{el.innerHTML=C2[el.dataset.c].map((p,i)=>`<div class="ph ${p[5]}" style="left:${p[0]}%;top:${p[1]}%;width:${p[2]}%;height:${p[3]}%;transform:rotate(${p[4]}deg);z-index:${i+1}"><span class="lbl">${p[6]}</span></div>`).join('')});
+  /* contact sheets with a grease-pencil pick */
+  document.querySelectorAll('[data-film]').forEach(f=>{
+    const pick=+f.dataset.pick,t=f.dataset.tint||'';
+    f.innerHTML=f.dataset.film.split(',').map((n,i)=>`<figure><div class="ph ${t&&i%2?t:''}"><span class="lbl">${n}</span></div><figcaption class="mono"><span>${String(i+1).padStart(2,'0')}A</span><span>▲</span></figcaption>${i+1===pick?`<svg class="circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M18 30 C30 6 96 4 110 34 S104 108 60 112 S6 96 8 56 S28 14 64 10"/></svg><span class="pick hand">This one!</span>`:''}</figure>`).join('');
+  });
+  /* ticker */
+  const w=['Design','Code','Sound','3D','Machine learning','Siat ’26','Cultus Lake, BC','Open to work','Built to learn'];
+  const h=w.map(x=>`<span>${x}</span><span>✕</span>`).join('');document.getElementById('tk').innerHTML=h+h+h;
+  /* load sequence */
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('ready')));
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* collage parallax */
+  if(!reduce&&matchMedia('(pointer:fine)').matches){
+    const ps=[...col.querySelectorAll('.piece')];let raf=0,mx=0,my=0;
+    addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(!raf)raf=requestAnimationFrame(()=>{raf=0;ps.forEach(p=>{const d=+p.dataset.depth;p.style.translate=`${(-mx*d).toFixed(1)}px ${(-my*d).toFixed(1)}px`})})});
+  }
+  /* print ad slow zoom */
+  const ad=document.getElementById('adph');
+  if(!reduce){let t=0;const zoom=()=>{t=0;const r=ad.parentNode.getBoundingClientRect(),p=Math.min(1,Math.max(0,1-(r.bottom)/(innerHeight+r.height)));ad.style.transform=`scale(${(1.12-p*.12).toFixed(4)})`};addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(zoom)},{passive:true});zoom()}
+  /* reveals */
+  const els=document.querySelectorAll('.rv,#ct,.sheet');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    els.forEach(el=>io.observe(el));
+  } else els.forEach(el=>el.classList.add('in'));
+}
+</script>
+</body>
+</html>
