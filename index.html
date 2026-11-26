@@ -229,9 +229,9 @@ footer .r{text-align:right}
 .feat a span.mono:not(.n){grid-column:2;color:var(--g2)}
 .feat a:hover b{color:var(--cob)}
 /* project thumbnails + galleries: clear, untinted */
-.thumb{position:relative;aspect-ratio:4/3;border:1px solid var(--ink);box-shadow:8px 8px 0 var(--ink);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
-.thumb::before{content:"";position:absolute;top:-12px;left:50%;width:96px;height:26px;transform:translateX(-50%) rotate(-3deg);background:rgba(204,211,246,.9);z-index:3}
-.part:hover .thumb{transform:translate(-3px,-3px);box-shadow:12px 12px 0 var(--ink)}
+.thumb{position:relative;aspect-ratio:4/3;border-radius:6px;box-shadow:0 18px 36px -18px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.08);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.thumb::before{content:"";position:absolute;top:-12px;pointer-events:none;left:50%;width:96px;height:26px;transform:translateX(-50%) rotate(-3deg);background:rgba(204,211,246,.9);z-index:3}
+.part:hover .thumb{transform:translateY(-6px);box-shadow:0 28px 44px -20px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.08)}
 .gallery{display:grid;gap:clamp(12px,1.6vw,20px);margin:clamp(32px,4vw,56px) 0 clamp(40px,5vw,64px)}
 .gallery figure{margin:0}
 .gallery .shot{aspect-ratio:16/9;border:1px solid var(--ink);width:100%;padding:0;font:inherit;color:inherit;cursor:zoom-in}
@@ -265,17 +265,42 @@ footer .r{text-align:right}
 .rail{display:flex;gap:clamp(18px,2.4vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 4px 28px;scrollbar-width:thin;scrollbar-color:var(--ink) transparent;overscroll-behavior-x:contain}
 .rail::-webkit-scrollbar{height:6px}.rail::-webkit-scrollbar-thumb{background:var(--ink);border-radius:3px}
 .phone{flex:none;width:clamp(220px,20vw,270px);margin:0;scroll-snap-align:start}
-.device{position:relative;aspect-ratio:1638/3333;filter:drop-shadow(0 22px 22px rgba(0,0,0,.28));transition:transform .5s var(--ease)}
-.device::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:url("images/iphone-frame.png") center/100% 100% no-repeat}
-.phone:hover .device{transform:translateY(-6px)}
-.screen{position:absolute;left:4.6%;right:4.7%;top:1.8%;bottom:1.9%;border-radius:11%/5.2%;overflow:hidden auto;background:#f2f6f0;scrollbar-width:none;cursor:zoom-in}
-.screen::-webkit-scrollbar{display:none}
-.screen img{display:block;width:100%;height:auto}
-.screen:focus-visible{outline:3px solid var(--cob);outline-offset:-3px}
+.mock{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;transition:transform .5s var(--ease)}
+.mock img{display:block;width:100%;height:auto;filter:drop-shadow(0 20px 22px rgba(0,0,0,.22))}
+.phone:hover .mock{transform:translateY(-6px)}
+.mock:focus-visible{outline:3px solid var(--cob);outline-offset:4px;border-radius:12%/6%}
+.overview{margin:0;max-width:820px;justify-self:center;width:100%}
+.overview .mock img{filter:none;border:1px solid var(--ink)}
+.overview figcaption{margin-top:10px;text-align:center;color:var(--g2)}
 .phone figcaption{margin-top:14px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
 .phone figcaption>span:first-child{color:var(--g2)}
-.scrl{color:var(--cob)}
 .lb img{max-height:90svh}
+
+
+/* value studio plates */
+.plates{display:grid;gap:clamp(48px,6vw,80px);margin:clamp(36px,5vw,64px) 0 clamp(48px,6vw,80px)}
+.pgrid{display:grid;gap:clamp(16px,2vw,28px)}
+.pgrid+.pgrid{margin-top:clamp(16px,2vw,28px)}
+.pgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pgrid.split{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}
+.plate{margin:0}
+.plate .mock img{filter:none;border:1px solid var(--ink);background:#111}
+.plate .mock:hover{transform:translateY(-4px)}
+.plate figcaption{margin-top:10px;color:var(--g2);line-height:1.5}
+@media(max-width:760px){.pgrid.two,.pgrid.split{grid-template-columns:minmax(0,1fr)}}
+
+
+/* value studio story */
+.story{display:grid;gap:clamp(28px,3.5vw,44px);margin:clamp(36px,5vw,64px) 0 0}
+.chap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(20px,4vw,64px);border-top:1px solid var(--ink);padding-top:22px;margin-top:clamp(20px,3vw,40px)}
+.chap h4{margin:6px 0 0;font:900 clamp(24px,2.6vw,34px)/1.02 Archivo,sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+.chap-body p{margin:0;font-size:clamp(16px,1.3vw,18px);line-height:1.65;max-width:62ch}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:clamp(16px,1.3vw,17px);max-width:62ch}
+.ticks li{padding-left:22px;position:relative}
+.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--cob)}
+.chap-figs{display:grid;gap:clamp(16px,2vw,28px)}
+.pgrid.half{grid-template-columns:minmax(0,.62fr);justify-content:center}
+@media(max-width:860px){.chap{grid-template-columns:minmax(0,1fr)}.pgrid.half{grid-template-columns:minmax(0,1fr)}}
 
 /* reveal */
 .rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -309,10 +334,10 @@ footer .r{text-align:right}
   <nav class="feat" aria-label="Projects">
     <span class="hand by">Featuring</span>
     <ol>
-      <li style="transition-delay:.5s"><a href="#atom-viscera"><span class="mono n">01</span><b>Atom Viscera</b><span class="mono">VR · sound design</span></a></li>
-      <li style="transition-delay:.6s"><a href="#traffic-signs"><span class="mono n">02</span><b>Traffic Signs</b><span class="mono">Machine learning</span></a></li>
-      <li style="transition-delay:.7s"><a href="#eco-quest"><span class="mono n">03</span><b>Eco Quest</b><span class="mono">UX · mobile app</span></a></li>
-      <li style="transition-delay:.8s"><a href="#value-studio"><span class="mono n">04</span><b>Value Studio</b><span class="mono">Python · computer vision</span></a></li>
+      <li style="transition-delay:0.5s"><a href="#atom-viscera"><span class="mono n">01</span><b>Atom Viscera</b><span class="mono">VR · sound design</span></a></li>
+      <li style="transition-delay:0.6s"><a href="#eco-quest"><span class="mono n">02</span><b>Eco Quest</b><span class="mono">UX · mobile app</span></a></li>
+      <li style="transition-delay:0.7s"><a href="#value-studio"><span class="mono n">03</span><b>Value Studio</b><span class="mono">Python · computer vision</span></a></li>
+      <li style="transition-delay:0.8s"><a href="#traffic-signs"><span class="mono n">04</span><b>Traffic Signs</b><span class="mono">Machine learning</span></a></li>
     </ol>
   </nav>
 </section>
@@ -333,20 +358,10 @@ footer .r{text-align:right}
       <span class="go mono">See the part</span>
     </div>
   </a>
-  <a class="part" href="#traffic-signs">
-    <div class="thumb ph rv" data-img="traffic-signs-1"><span class="lbl">A street photo with the model&#x27;s labelled boxes</span></div>
-    <div class="rv">
-      <span class="hand no">Part two</span>
-      <span class="tag t">Traffic Signs</span>
-      <p class="hand starring">Starring: YOLOv8, PyTorch, Roboflow</p>
-      <p>A YOLOv8 model built, audited and tuned to detect Canadian traffic signs that European-trained models get wrong.</p>
-      <span class="go mono">See the part</span>
-    </div>
-  </a>
   <a class="part" href="#eco-quest">
     <div class="thumb ph rv" data-img="eco-quest-1"><span class="lbl">2–3 app screens side by side (Quest Hub)</span></div>
     <div class="rv">
-      <span class="hand no">Part three</span>
+      <span class="hand no">Part two</span>
       <span class="tag t">Eco Quest</span>
       <p class="hand starring">Starring: UX research, React Native, Firebase</p>
       <p>A gamified climate-action app that turns caring about the climate into three small quests a day.</p>
@@ -356,10 +371,20 @@ footer .r{text-align:right}
   <a class="part" href="#value-studio">
     <div class="thumb ph rv" data-img="value-studio-1"><span class="lbl">The app with a reference photo loaded</span></div>
     <div class="rv">
-      <span class="hand no">Part four</span>
+      <span class="hand no">Part three</span>
       <span class="tag t">Value Studio</span>
-      <p class="hand starring">Starring: Python, OpenCV, scikit-learn, ComfyUI</p>
-      <p>A drawing-reference app that teaches beginners to see tone, turning any photo into flat light and dark planes you build up layer by layer.</p>
+      <p class="hand starring">Starring: Python, OpenCV, scikit-learn, OpenGL, ComfyUI</p>
+      <p>A drawing-reference app that teaches you to see light and dark. Turn any photo into flat tones and draw it layer by layer, the way you would build a real drawing.</p>
+      <span class="go mono">See the part</span>
+    </div>
+  </a>
+  <a class="part" href="#traffic-signs">
+    <div class="thumb ph rv" data-img="traffic-signs-1"><span class="lbl">A street photo with the model&#x27;s labelled boxes</span></div>
+    <div class="rv">
+      <span class="hand no">Part four</span>
+      <span class="tag t">Traffic Signs</span>
+      <p class="hand starring">Starring: YOLOv8, PyTorch, Roboflow</p>
+      <p>A YOLOv8 model built, audited and tuned to detect Canadian traffic signs that European-trained models get wrong.</p>
       <span class="go mono">See the part</span>
     </div>
   </a>
@@ -385,48 +410,29 @@ footer .r{text-align:right}
   </div>
 </div></section>
 
-<!-- TRAFFIC SIGNS -->
-<section class="case" id="traffic-signs"><div class="wrap">
-  <div class="case-top">
-    <div class="rv"><span class="hand no">Part two · IAT 360</span><span class="tag">Traffic Signs</span><p class="lede">A YOLOv8 model built, audited and tuned to detect Canadian traffic signs that European-trained models get wrong.</p></div>
-    <dl class="credits rv"><dt>Directed by</dt><dd>Coop</dd><dt>Role</dt><dd>Solo ML engineer + data developer</dd><dt>Course</dt><dd>IAT 360</dd><dt>Model</dt><dd>Ultralytics YOLOv8, PyTorch, CUDA</dd><dt>Data</dt><dd>Roboflow, Python, Pandas, Excel</dd></dl>
-  </div>
-  <div class="gallery rv"><figure><button class="ph shot" type="button" data-img="traffic-signs-1" data-cap="Detections on a Canadian street" aria-label="Enlarge: Detections on a Canadian street"><span class="lbl">A street photo with the model&#x27;s labelled boxes</span></button><figcaption class="mono">Detections on a Canadian street</figcaption></figure><div class="row"><figure><button class="ph shot" type="button" data-img="traffic-signs-2" data-cap="Hand-labelling in Roboflow" aria-label="Enlarge: Hand-labelling in Roboflow"><span class="lbl">Roboflow labelling screen</span></button><figcaption class="mono">Hand-labelling in Roboflow</figcaption></figure><figure><button class="ph shot" type="button" data-img="traffic-signs-3" data-cap="Training results" aria-label="Enlarge: Training results"><span class="lbl">mAP50 / loss chart over epochs</span></button><figcaption class="mono">Training results</figcaption></figure><figure><button class="ph shot" type="button" data-img="traffic-signs-4" data-cap="Baseline vs my model" aria-label="Enlarge: Baseline vs my model"><span class="lbl">Before and after: a baseline mistake vs your model</span></button><figcaption class="mono">Baseline vs my model</figcaption></figure></div></div>
-  <div class="body2 rv"><div><span class="mono">The problem</span><p>Open-source sign detectors lean on European datasets, with different sign shapes, colours and broad categories. On Canadian roads they misclassify, even lumping a red octagon and an inverted triangle into one generic group.</p></div><div><span class="mono">The idea</span><p>Build, audit and tune a detection pipeline made for Canadian signage, from the dataset up.</p></div><div><span class="mono">The build</span><p>577 real-world photos, 746 bounding boxes I labelled by hand in Roboflow, and a YOLOv8 training pipeline in Python.</p></div></div>
-  <div class="stats rv"><div><b>577</b><span>Photos collected + labelled</span></div><div><b>7</b><span>Sign classes, up from 4</span></div><div><b>80.4%</b><span>Final mAP50 (87.8% precision)</span></div></div>
-  <div class="pd">
-    <div class="rv"><h3>Process</h3><ol class="steps"><li><span class="hand">1</span><div><b>Dataset</b><p>Collected 577 images of Canadian signs and hand-labelled 746 boxes, split 67/33 into 387 training and 190 validation images.</p></div></li><li><span class="hand">2</span><div><b>Baseline</b><p>Benchmarked a pre-trained European model on four broad categories: prohibitory, danger, mandatory and other.</p></div></li><li><span class="hand">3</span><div><b>Tuning</b><p>Ran one-factor-at-a-time experiments on epochs (50–200), batch size (16–64), weight decay and learning rate.</p></div></li><li><span class="hand">4</span><div><b>Log audit</b><p>Read the raw training logs (results.csv) to see how YOLOv8&#x27;s scheduler and warmup interacted with my settings.</p></div></li><li><span class="hand">5</span><div><b>Final model</b><p>Combined the best settings (100 epochs, batch 32, weight decay 0.0001) into one model.</p></div></li></ol></div>
-    <div class="rv"><h3>Decisions</h3><div class="cards"><div class="card"><b>4 classes → 7</b>Splitting into speed limit, no left, no right, pedestrian crossing, keep right, stop and yield stopped stop and yield signs sharing one &quot;other&quot; label, and cut classification loss.</div><div class="card"><b>Keep the best checkpoint</b>Longer runs peaked between epochs 66 and 96, then declined as the model memorised background. A 100-epoch run deploys the best weights, not the last.</div><div class="card"><b>Light weight decay</b>Heavy decay (0.005) pushed precision to 82.11% but dropped recall to 73.93% on distant or blurry signs. 0.0001 gave the best mAP50 (79.37%) and lowest classification loss.</div><div class="card"><b>Audit the optimizer</b>Learning-rate sweeps gave identical results. The logs showed warmup and auto-optimizer clamping them; disabling warmup exposed the framework&#x27;s 0.000909 ceiling.</div></div></div>
-  </div>
-  <div class="result rv">
-    <span class="tag">The result</span>
-    <p>A 7-class detector with 87.75% precision, 76.75% recall and 80.42% mAP50, exported as a lightweight real-time weights file.</p>
-    <span class="hand">Peak 82.99% mAP50 at epoch 66 · up to 86.06% in learning-rate sweeps</span>
-  </div>
-</div></section>
-
 <!-- ECO QUEST -->
 <section class="case" id="eco-quest"><div class="wrap">
   <div class="case-top">
-    <div class="rv"><span class="hand no">Part three · IAT 351</span><span class="tag">Eco Quest</span><p class="lede">A gamified climate-action app that turns caring about the climate into three small quests a day.</p></div>
+    <div class="rv"><span class="hand no">Part two · IAT 351</span><span class="tag">Eco Quest</span><p class="lede">A gamified climate-action app that turns caring about the climate into three small quests a day.</p></div>
     <dl class="credits rv"><dt>Directed by</dt><dd>Coop</dd><dt>Role</dt><dd>Sole UX designer + developer</dd><dt>Course</dt><dd>IAT 351, Human-Computer Interaction</dd><dt>Tools</dt><dd>Figma, React Native, Expo, Firebase, VS Code</dd></dl>
   </div>
   <div class="screens">
   <section class="flow rv" aria-label="Welcome + sign up">
     <div class="flow-head"><div><span class="hand no2">Flow 1</span><h4>Welcome + sign up</h4><p class="mono">First launch, account creation and four onboarding steps · 7 screens</p></div>
       <div class="nav2"><button class="btn arr" type="button" data-dir="-1" aria-label="Previous screens">←</button><button class="btn arr" type="button" data-dir="1" aria-label="Next screens">→</button></div></div>
-    <div class="rail"><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/01-splash.webp" alt="Eco Quest: Splash" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>01</span> Splash</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/02-log-in.webp" alt="Eco Quest: Log in" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>02</span> Log in</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/03-sign-up.webp" alt="Eco Quest: Sign up" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>03</span> Sign up</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/04-onboarding-1.webp" alt="Eco Quest: Onboarding 1 · the idea" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>04</span> Onboarding 1 · the idea</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/05-onboarding-2.webp" alt="Eco Quest: Onboarding 2 · pick a critter" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>05</span> Onboarding 2 · pick a critter</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/06-onboarding-3.webp" alt="Eco Quest: Onboarding 3 · how it works" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>06</span> Onboarding 3 · how it works</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/07-onboarding-4.webp" alt="Eco Quest: Onboarding 4 · interests" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>07</span> Onboarding 4 · interests</figcaption></figure></div>
+    <div class="rail"><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Splash"><img src="images/eco/01-splash.webp" data-full="images/eco/01-splash@2x.webp" alt="Eco Quest: Splash" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>01</span> Splash</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Log in"><img src="images/eco/02-log-in.webp" data-full="images/eco/02-log-in@2x.webp" alt="Eco Quest: Log in" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>02</span> Log in</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Sign up"><img src="images/eco/03-sign-up.webp" data-full="images/eco/03-sign-up@2x.webp" alt="Eco Quest: Sign up" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>03</span> Sign up</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Onboarding 1 · welcome"><img src="images/eco/04-onboarding-1.webp" data-full="images/eco/04-onboarding-1@2x.webp" alt="Eco Quest: Onboarding 1 · welcome" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>04</span> Onboarding 1 · welcome</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Onboarding 2 · look and name"><img src="images/eco/05-onboarding-2.webp" data-full="images/eco/05-onboarding-2@2x.webp" alt="Eco Quest: Onboarding 2 · look and name" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>05</span> Onboarding 2 · look and name</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Onboarding 3 · how it works"><img src="images/eco/06-onboarding-3.webp" data-full="images/eco/06-onboarding-3@2x.webp" alt="Eco Quest: Onboarding 3 · how it works" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>06</span> Onboarding 3 · how it works</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Onboarding 4 · interests"><img src="images/eco/07-onboarding-4.webp" data-full="images/eco/07-onboarding-4@2x.webp" alt="Eco Quest: Onboarding 4 · interests" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>07</span> Onboarding 4 · interests</figcaption></figure></div>
   </section>
   <section class="flow rv" aria-label="Daily quests">
     <div class="flow-head"><div><span class="hand no2">Flow 2</span><h4>Daily quests</h4><p class="mono">Three quests a day, swaps, and completing with a photo · 6 screens</p></div>
       <div class="nav2"><button class="btn arr" type="button" data-dir="-1" aria-label="Previous screens">←</button><button class="btn arr" type="button" data-dir="1" aria-label="Next screens">→</button></div></div>
-    <div class="rail"><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/08-quest-hub.webp" alt="Eco Quest: Quest Hub" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>08</span> Quest Hub <span class="scrl">Scroll ↕</span></figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/09-swap.webp" alt="Eco Quest: Swap a quest" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>09</span> Swap a quest</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/10-quest-detail.webp" alt="Eco Quest: Quest detail" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>10</span> Quest detail <span class="scrl">Scroll ↕</span></figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/11-camera.webp" alt="Eco Quest: Camera with privacy warning" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>11</span> Camera with privacy warning</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/12-caption.webp" alt="Eco Quest: Add a caption" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>12</span> Add a caption</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/13-complete.webp" alt="Eco Quest: Quest complete" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>13</span> Quest complete</figcaption></figure></div>
+    <div class="rail"><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Quest Hub"><img src="images/eco/08-quest-hub.webp" data-full="images/eco/08-quest-hub@2x.webp" alt="Eco Quest: Quest Hub" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>08</span> Quest Hub</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Swap a quest"><img src="images/eco/13-swap.webp" data-full="images/eco/13-swap@2x.webp" alt="Eco Quest: Swap a quest" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>09</span> Swap a quest</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Quest detail"><img src="images/eco/09-quest-detail.webp" data-full="images/eco/09-quest-detail@2x.webp" alt="Eco Quest: Quest detail" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>10</span> Quest detail</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Camera with privacy warning"><img src="images/eco/10-camera.webp" data-full="images/eco/10-camera@2x.webp" alt="Eco Quest: Camera with privacy warning" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>11</span> Camera with privacy warning</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Photo caption"><img src="images/eco/11-caption.webp" data-full="images/eco/11-caption@2x.webp" alt="Eco Quest: Photo caption" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>12</span> Photo caption</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Quest complete"><img src="images/eco/12-complete.webp" data-full="images/eco/12-complete@2x.webp" alt="Eco Quest: Quest complete" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>13</span> Quest complete</figcaption></figure></div>
   </section>
   <section class="flow rv" aria-label="Community + profile">
     <div class="flow-head"><div><span class="hand no2">Flow 3</span><h4>Community + profile</h4><p class="mono">The feed, awards, fair rankings and your titles · 6 screens</p></div>
       <div class="nav2"><button class="btn arr" type="button" data-dir="-1" aria-label="Previous screens">←</button><button class="btn arr" type="button" data-dir="1" aria-label="Next screens">→</button></div></div>
-    <div class="rail"><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/14-community.webp" alt="Eco Quest: Community feed" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>14</span> Community feed <span class="scrl">Scroll ↕</span></figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/15-award.webp" alt="Eco Quest: Send an award" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>15</span> Send an award</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/16-rankings.webp" alt="Eco Quest: Rankings by league" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>16</span> Rankings by league <span class="scrl">Scroll ↕</span></figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/17-member.webp" alt="Eco Quest: Member profile" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>17</span> Member profile</figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/18-profile.webp" alt="Eco Quest: Your profile" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>18</span> Your profile <span class="scrl">Scroll ↕</span></figcaption></figure><figure class="phone"><div class="device"><div class="screen" tabindex="0"><img src="images/eco/19-titles.webp" alt="Eco Quest: Eco-titles" loading="lazy" decoding="async" width="600"></div></div><figcaption class="mono"><span>19</span> Eco-titles</figcaption></figure></div>
+    <div class="rail"><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Community feed"><img src="images/eco/14-community.webp" data-full="images/eco/14-community@2x.webp" alt="Eco Quest: Community feed" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>14</span> Community feed</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Send an award"><img src="images/eco/15-award.webp" data-full="images/eco/15-award@2x.webp" alt="Eco Quest: Send an award" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>15</span> Send an award</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Member profile"><img src="images/eco/16-member.webp" data-full="images/eco/16-member@2x.webp" alt="Eco Quest: Member profile" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>16</span> Member profile</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Rankings by league"><img src="images/eco/17-rankings.webp" data-full="images/eco/17-rankings@2x.webp" alt="Eco Quest: Rankings by league" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>17</span> Rankings by league</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Your profile"><img src="images/eco/18-profile.webp" data-full="images/eco/18-profile@2x.webp" alt="Eco Quest: Your profile" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>18</span> Your profile</figcaption></figure><figure class="phone"><button class="mock" type="button" aria-label="Enlarge: Eco-titles"><img src="images/eco/19-titles.webp" data-full="images/eco/19-titles@2x.webp" alt="Eco Quest: Eco-titles" loading="lazy" decoding="async" width="560" height="1140"></button><figcaption class="mono"><span>19</span> Eco-titles</figcaption></figure></div>
   </section>
+  <figure class="overview rv"><button class="mock" type="button" aria-label="Enlarge: all 19 screens"><img src="images/eco/all-screens.webp" data-full="images/eco/all-screens.webp" alt="Eco Quest: all 19 screens at a glance" loading="lazy" decoding="async" width="1600" height="2472"></button><figcaption class="mono">All 19 screens at a glance · tap to enlarge</figcaption></figure>
 </div>
   <div class="body2 rv"><div><span class="mono">The problem</span><p>Students care about climate change but rarely act on it day to day. The problem feels too big, and most climate apps that use points and feedback have never been tested.</p></div><div><span class="mono">The idea</span><p>Make climate action small, social and doable: three quests a day (easy, medium, hard), a community feed, awards and fair rankings.</p></div><div><span class="mono">The build</span><p>A fully working iOS and Android app, designed from HCI research and checked against my own design rationale.</p></div></div>
   <div class="stats rv"><div><b>19</b><span>Screens designed + built</span></div><div><b>75</b><span>Quests across 7 areas</span></div><div><b>14:1</b><span>Text contrast, up from 1.7:1</span></div></div>
@@ -444,20 +450,75 @@ footer .r{text-align:right}
 <!-- VALUE STUDIO -->
 <section class="case" id="value-studio"><div class="wrap">
   <div class="case-top">
-    <div class="rv"><span class="hand no">Part four · IAT 460</span><span class="tag">Value Studio</span><p class="lede">A drawing-reference app that teaches beginners to see tone, turning any photo into flat light and dark planes you build up layer by layer.</p></div>
-    <dl class="credits rv"><dt>Directed by</dt><dd>Coop</dd><dt>Role</dt><dd>Solo: concept, proposal, first version + scope</dd><dt>Course</dt><dd>IAT 460, Generative AI + Computational Creativity</dd><dt>Tools</dt><dd>Python, PyQt5, OpenCV, NumPy, scikit-learn, OpenGL, ComfyUI (Stable Diffusion)</dd></dl>
+    <div class="rv"><span class="hand no">Part three · IAT 460</span><span class="tag">Value Studio</span><p class="lede">A drawing-reference app that teaches you to see light and dark.</p></div>
+    <dl class="credits rv"><dt>Directed by</dt><dd>Coop</dd><dt>Role</dt><dd>Solo project: concept, the core value engine, design direction, testing and scope</dd><dt>Course</dt><dd>IAT 460, Generative AI + Computational Creativity</dd><dt>Tools</dt><dd>Python · PyQt5 · OpenCV · NumPy · scikit-learn · OpenGL · ComfyUI</dd></dl>
   </div>
-  <div class="gallery rv"><figure><button class="ph shot" type="button" data-img="value-studio-1" data-cap="Value Studio with a reference loaded" aria-label="Enlarge: Value Studio with a reference loaded"><span class="lbl">The app with a reference photo loaded</span></button><figcaption class="mono">Value Studio with a reference loaded</figcaption></figure><div class="row"><figure><button class="ph shot" type="button" data-img="value-studio-2" data-cap="Layer-by-layer reveal" aria-label="Enlarge: Layer-by-layer reveal"><span class="lbl">Outline → darkest → full reveal</span></button><figcaption class="mono">Layer-by-layer reveal</figcaption></figure><figure><button class="ph shot" type="button" data-img="value-studio-3" data-cap="Drawing aids" aria-label="Enlarge: Drawing aids"><span class="lbl">Proportion grid, Notan or upside-down view</span></button><figcaption class="mono">Drawing aids</figcaption></figure><figure><button class="ph shot" type="button" data-img="value-studio-4" data-cap="Spatial Room and Practice Room" aria-label="Enlarge: Spatial Room and Practice Room"><span class="lbl">Spatial Room (moving the light) or Practice Room</span></button><figcaption class="mono">Spatial Room and Practice Room</figcaption></figure></div></div>
-  <div class="body2 rv"><div><span class="mono">The problem</span><p>Beginners copy a photo&#x27;s details instead of its light and dark shapes, so their drawings look flat. Good reference photos for a specific subject, or a specific lighting setup, are also hard to find.</p></div><div><span class="mono">The idea</span><p>Turn any photo into 3 to 100 flat tonal planes and reveal them layer by layer, in the order you&#x27;d actually draw them.</p></div><div><span class="mono">My part</span><p>I came up with the concept and proposal, and wrote the first version: the value-plane processing and main window, about 1,100 lines. I built the rest with Claude&#x27;s help, tested it on my own machine and gave feedback throughout.</p></div></div>
-  <div class="stats rv"><div><b>~90 ms</b><span>Per frame at 2200 px, down from ~20 s per-pixel</span></div><div><b>64</b><span>Unit tests, plus a benchmark</span></div><div><b>3–100</b><span>Tonal planes from any photo</span></div></div>
+  <div class="story">
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: A reference photo and its 24-tone study in blue pen"><img src="images/vs/hero.webp" data-full="images/vs/hero@2x.webp" alt="Value Studio: A reference photo and its 24-tone study in blue pen" loading="lazy" decoding="async" width="1400" height="628"></button><figcaption class="mono">A reference photo and its 24-tone study in blue pen</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">01</span><h4>Why I made it</h4></div>
+    <div class="chap-body"><p>When people start drawing, they copy details: the eyelashes, the hair, the folds in a shirt. The drawing looks flat, because the real structure is in the pattern of light and dark shapes, which artists call value. I wanted a tool that shows you that pattern, so you can draw the big shapes first and the details later. I made Value Studio for the drawing practice I wished I had.</p></div>
+  </section>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">02</span><h4>The core idea: build it layer by layer</h4></div>
+    <div class="chap-body"><p>Load any photo and choose how many tones to break it into. The app groups the photo&#x27;s greys into that many flat tones, then builds the study one layer at a time. Layer 1 is a faint outline, and the darkest planes come next. You scrub through the layers with a slider and draw each one in turn, the way you would build a real drawing. A timelapse and a value ladder show which tones are painted so far.</p></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Layers 1 to 24. The app builds the study from the darkest planes up, the way you would draw it"><img src="images/vs/layer-buildup.webp" data-full="images/vs/layer-buildup@2x.webp" alt="Value Studio: Layers 1 to 24. The app builds the study from the darkest planes up, the way you would draw it" loading="lazy" decoding="async" width="1400" height="336"></button><figcaption class="mono">Layers 1 to 24. The app builds the study from the darkest planes up, the way you would draw it</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">03</span><h4>You decide how simple or detailed</h4></div>
+    <div class="chap-body"><p>The number of tones is yours to set, from 3 to 100. Three tones give big, simple shapes that are easy to block in. A hundred give a detailed, photographic study. Five to ten is a good place to start.</p></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: The same photo at 3, 6, 12, 24 and 100 tones, shown at the last flat layer"><img src="images/vs/tone-range.webp" data-full="images/vs/tone-range@2x.webp" alt="Value Studio: The same photo at 3, 6, 12, 24 and 100 tones, shown at the last flat layer" loading="lazy" decoding="async" width="1400" height="449"></button><figcaption class="mono">The same photo at 3, 6, 12, 24 and 100 tones, shown at the last flat layer</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">04</span><h4>Block things out to stay focused</h4></div>
+    <div class="chap-body"><p>You can paint straight onto the reference before the tones are calculated. Flatten a busy background, paint out a pattern, or block the photo into big simple shapes. The study then rebuilds from your edited version. The brush has a size slider, an eraser, an eyedropper that picks up a tone from the image, and undo. There&#x27;s also a crop tool. Your original file is never touched.</p></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Paint out everything but the eyes, and the study rebuilds from just that part"><img src="images/vs/brush-blocking.webp" data-full="images/vs/brush-blocking@2x.webp" alt="Value Studio: Paint out everything but the eyes, and the study rebuilds from just that part" loading="lazy" decoding="async" width="1400" height="704"></button><figcaption class="mono">Paint out everything but the eyes, and the study rebuilds from just that part</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">05</span><h4>The app</h4></div>
+    <div class="chap-body"><p>Everything sits in one calm, monochrome window with light and dark themes, so the photo&#x27;s values are the only strong colour. Every panel opens and closes, every control has a plain-language hover tip, and a Guide page explains what each part is for and why.</p></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: The Studio tab: layer slider, value ladder and the reference score"><img src="images/vs/studio.webp" data-full="images/vs/studio@2x.webp" alt="Value Studio: The Studio tab: layer slider, value ladder and the reference score" loading="lazy" decoding="async" width="1400" height="910"></button><figcaption class="mono">The Studio tab: layer slider, value ladder and the reference score</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">06</span><h4>Tools that train your eye</h4></div>
+    <div class="chap-body"><ul class="ticks"><li><b>Upside-down and mirror:</b> you stop drawing “an eye” and draw the shapes you actually see.</li><li><b>Proportion grid:</b> copy one square at a time.</li><li><b>Squint and Notan:</b> blur the photo, or reduce it to two tones, to find the big shapes.</li><li><b>Simplify shapes:</b> merges small specks into big masses.</li><li><b>Media tints:</b> blue pen, graphite, sepia and high contrast.</li><li><b>Plus:</b> a study timer, the reference score and a printable layer sheet.</li></ul></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Five aids, each hiding or exaggerating something so the big shapes show"><img src="images/vs/drawing-aids.webp" data-full="images/vs/drawing-aids@2x.webp" alt="Value Studio: Five aids, each hiding or exaggerating something so the big shapes show" loading="lazy" decoding="async" width="1400" height="460"></button><figcaption class="mono">Five aids, each hiding or exaggerating something so the big shapes show</figcaption></figure><div class="pgrid half"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Save Layer Sheet makes a printable page to take to the easel"><img src="images/vs/layer-sheet.webp" data-full="images/vs/layer-sheet@2x.webp" alt="Value Studio: Save Layer Sheet makes a printable page to take to the easel" loading="lazy" decoding="async" width="1400" height="1317"></button><figcaption class="mono">Save Layer Sheet makes a printable page to take to the easel</figcaption></figure></div></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">07</span><h4>More than a single tool</h4></div>
+    <div class="chap-body"><ul class="ticks"><li><b>AI Engine:</b> type a subject and the app asks ComfyUI (Stable Diffusion) for a reference photo, then analyzes it like any other. The AI only makes the reference. You do the drawing.</li><li><b>Spatial Room:</b> light a 3D model, move the light, and capture the view as a reference.</li><li><b>Practice Room:</b> perspective templates and random shapes to draw from imagination, including ink blots that a genetic algorithm breeds from the ones you pick.</li></ul></div>
+  </section>
+  <div class="chap-figs rv"><div class="pgrid two"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Spatial Room: move the light on a 3D scene and capture it"><img src="images/vs/spatial-room.webp" data-full="images/vs/spatial-room@2x.webp" alt="Value Studio: Spatial Room: move the light on a 3D scene and capture it" loading="lazy" decoding="async" width="1400" height="910"></button><figcaption class="mono">Spatial Room: move the light on a 3D scene and capture it</figcaption></figure><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Practice Room: pick the blots you like and breed the next generation"><img src="images/vs/practice-room.webp" data-full="images/vs/practice-room@2x.webp" alt="Value Studio: Practice Room: pick the blots you like and breed the next generation" loading="lazy" decoding="async" width="1400" height="910"></button><figcaption class="mono">Practice Room: pick the blots you like and breed the next generation</figcaption></figure></div><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Generations 1, 4 and 8 of the genetic algorithm"><img src="images/vs/blot-evolution.webp" data-full="images/vs/blot-evolution@2x.webp" alt="Value Studio: Generations 1, 4 and 8 of the genetic algorithm" loading="lazy" decoding="async" width="1400" height="927"></button><figcaption class="mono">Generations 1, 4 and 8 of the genetic algorithm</figcaption></figure></div>
+  <section class="chap rv">
+    <div class="chap-head"><span class="hand no2">08</span><h4>Under the hood</h4></div>
+    <div class="chap-body"><p>The slow part, grouping the tones, runs once on the photo&#x27;s grey histogram. The layer slider then only repaints through a lookup table, so it feels instant.</p></div>
+  </section>
+  <div class="chap-figs rv"><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: Six stages from reference to finished study"><img src="images/vs/pipeline.webp" data-full="images/vs/pipeline@2x.webp" alt="Value Studio: Six stages from reference to finished study" loading="lazy" decoding="async" width="1400" height="420"></button><figcaption class="mono">Six stages from reference to finished study</figcaption></figure><figure class="plate"><button class="mock" type="button" aria-label="Enlarge: First frame in about 90 ms at 2200 px, against about 20 s for my first per-pixel version"><img src="images/vs/performance.webp" data-full="images/vs/performance@2x.webp" alt="Value Studio: First frame in about 90 ms at 2200 px, against about 20 s for my first per-pixel version" loading="lazy" decoding="async" width="1400" height="525"></button><figcaption class="mono">First frame in about 90 ms at 2200 px, against about 20 s for my first per-pixel version</figcaption></figure></div>
+</div>
+  <div class="result rv">
+    <span class="tag">What I learned</span>
+    <p>The part I enjoyed most was cutting: making the tool faster and calmer mattered more than adding features.</p>
+    <span class="hand">IAT 460 · Python desktop app</span>
+  </div>
+</div></section>
+
+<!-- TRAFFIC SIGNS -->
+<section class="case" id="traffic-signs"><div class="wrap">
+  <div class="case-top">
+    <div class="rv"><span class="hand no">Part four · IAT 360</span><span class="tag">Traffic Signs</span><p class="lede">A YOLOv8 model built, audited and tuned to detect Canadian traffic signs that European-trained models get wrong.</p></div>
+    <dl class="credits rv"><dt>Directed by</dt><dd>Coop</dd><dt>Role</dt><dd>Solo ML engineer + data developer</dd><dt>Course</dt><dd>IAT 360</dd><dt>Model</dt><dd>Ultralytics YOLOv8, PyTorch, CUDA</dd><dt>Data</dt><dd>Roboflow, Python, Pandas, Excel</dd></dl>
+  </div>
+  <div class="gallery rv"><figure><button class="ph shot" type="button" data-img="traffic-signs-1" data-cap="Detections on a Canadian street" aria-label="Enlarge: Detections on a Canadian street"><span class="lbl">A street photo with the model&#x27;s labelled boxes</span></button><figcaption class="mono">Detections on a Canadian street</figcaption></figure><div class="row"><figure><button class="ph shot" type="button" data-img="traffic-signs-2" data-cap="Hand-labelling in Roboflow" aria-label="Enlarge: Hand-labelling in Roboflow"><span class="lbl">Roboflow labelling screen</span></button><figcaption class="mono">Hand-labelling in Roboflow</figcaption></figure><figure><button class="ph shot" type="button" data-img="traffic-signs-3" data-cap="Training results" aria-label="Enlarge: Training results"><span class="lbl">mAP50 / loss chart over epochs</span></button><figcaption class="mono">Training results</figcaption></figure><figure><button class="ph shot" type="button" data-img="traffic-signs-4" data-cap="Baseline vs my model" aria-label="Enlarge: Baseline vs my model"><span class="lbl">Before and after: a baseline mistake vs your model</span></button><figcaption class="mono">Baseline vs my model</figcaption></figure></div></div>
+  <div class="body2 rv"><div><span class="mono">The problem</span><p>Open-source sign detectors lean on European datasets, with different sign shapes, colours and broad categories. On Canadian roads they misclassify, even lumping a red octagon and an inverted triangle into one generic group.</p></div><div><span class="mono">The idea</span><p>Build, audit and tune a detection pipeline made for Canadian signage, from the dataset up.</p></div><div><span class="mono">The build</span><p>577 real-world photos, 746 bounding boxes I labelled by hand in Roboflow, and a YOLOv8 training pipeline in Python.</p></div></div>
+  <div class="stats rv"><div><b>577</b><span>Photos collected + labelled</span></div><div><b>7</b><span>Sign classes, up from 4</span></div><div><b>80.4%</b><span>Final mAP50 (87.8% precision)</span></div></div>
   <div class="pd">
-    <div class="rv"><h3>Process</h3><ol class="steps"><li><span class="hand">1</span><div><b>Core</b><p>Started with the heart of it: turn a photo into 3 to 100 flat tonal planes.</p></div></li><li><span class="hand">2</span><div><b>Speed</b><p>Rewrote the processing for speed, running K-means on the grey histogram instead of every pixel.</p></div></li><li><span class="hand">3</span><div><b>Tools</b><p>Added the tools around it: drawing aids, the Spatial Room and the Practice Room.</p></div></li><li><span class="hand">4</span><div><b>Redesign</b><p>Redesigned the interface, with a Guide page and hover tips explaining every control.</p></div></li><li><span class="hand">5</span><div><b>Test</b><p>Wrote 64 unit tests plus a benchmark, and tested on Windows with Python 3.14.</p></div></li></ol></div>
-    <div class="rv"><h3>Decisions</h3><div class="cards"><div class="card"><b>Layer by layer</b>Layer 1 is a faint outline and the darkest planes come next, the order you&#x27;d draw in. A timelapse and a value ladder show your progress.</div><div class="card"><b>Speed</b>K-means on the grey histogram renders a frame in about 90 ms at 2200 px, against about 20 s for the per-pixel version.</div><div class="card"><b>Drawing aids</b>Upside-down view, a proportion grid, Notan (two tones), a brush that blocks in big shapes and a printable layer sheet.</div><div class="card"><b>Spatial Room</b>A 3D model viewer where you move the light, then capture the view as a reference.</div><div class="card"><b>AI as a helper</b>ComfyUI only makes the reference photo. You do the drawing.</div><div class="card"><b>Practice Room</b>Perspective grids and random shapes, including blots bred by a genetic algorithm from your picks.</div><div class="card"><b>Monochrome interface</b>The photo&#x27;s values are the only strong colour on screen, and all text meets WCAG AA contrast.</div></div></div></div>
+    <div class="rv"><h3>Process</h3><ol class="steps"><li><span class="hand">1</span><div><b>Dataset</b><p>Collected 577 images of Canadian signs and hand-labelled 746 boxes, split 67/33 into 387 training and 190 validation images.</p></div></li><li><span class="hand">2</span><div><b>Baseline</b><p>Benchmarked a pre-trained European model on four broad categories: prohibitory, danger, mandatory and other.</p></div></li><li><span class="hand">3</span><div><b>Tuning</b><p>Ran one-factor-at-a-time experiments on epochs (50–200), batch size (16–64), weight decay and learning rate.</p></div></li><li><span class="hand">4</span><div><b>Log audit</b><p>Read the raw training logs (results.csv) to see how YOLOv8&#x27;s scheduler and warmup interacted with my settings.</p></div></li><li><span class="hand">5</span><div><b>Final model</b><p>Combined the best settings (100 epochs, batch 32, weight decay 0.0001) into one model.</p></div></li></ol></div>
+    <div class="rv"><h3>Decisions</h3><div class="cards"><div class="card"><b>4 classes → 7</b>Splitting into speed limit, no left, no right, pedestrian crossing, keep right, stop and yield stopped stop and yield signs sharing one &quot;other&quot; label, and cut classification loss.</div><div class="card"><b>Keep the best checkpoint</b>Longer runs peaked between epochs 66 and 96, then declined as the model memorised background. A 100-epoch run deploys the best weights, not the last.</div><div class="card"><b>Light weight decay</b>Heavy decay (0.005) pushed precision to 82.11% but dropped recall to 73.93% on distant or blurry signs. 0.0001 gave the best mAP50 (79.37%) and lowest classification loss.</div><div class="card"><b>Audit the optimizer</b>Learning-rate sweeps gave identical results. The logs showed warmup and auto-optimizer clamping them; disabling warmup exposed the framework&#x27;s 0.000909 ceiling.</div></div></div>
   </div>
   <div class="result rv">
     <span class="tag">The result</span>
-    <p>A working desktop app with a Guide page and hover tips explaining every control, tested on Windows with Python 3.14.</p>
-    <span class="hand">Concept, first version and scope by me · built out with Claude</span>
+    <p>A 7-class detector with 87.75% precision, 76.75% recall and 80.42% mAP50, exported as a lightweight real-time weights file.</p>
+    <span class="hand">Peak 82.99% mAP50 at epoch 66 · up to 86.06% in learning-rate sweeps</span>
   </div>
 </div></section>
 
@@ -532,13 +593,11 @@ footer .r{text-align:right}
     f.querySelectorAll('.arr').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.dir)));
     r.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
   });
-  document.querySelectorAll('.screen').forEach(sc=>{
-    let moved=false;sc.addEventListener('scroll',()=>{moved=true});
-    sc.addEventListener('pointerdown',()=>{moved=false});
-    const open=()=>{const im=sc.querySelector('img');const L=document.querySelector('.lb');L.querySelector('img').src=im.src;L.querySelector('img').alt=im.alt;L.querySelector('p').textContent=im.alt.replace('Eco Quest: ','');L.classList.add('open');L.querySelector('button').focus()};
-    sc.addEventListener('click',()=>{if(!moved)open()});
-    sc.addEventListener('keydown',e=>{if(e.key==='Enter')open()});
-  });
+  document.querySelectorAll('.mock').forEach(b=>b.addEventListener('click',()=>{
+    const im=b.querySelector('img'),L=document.querySelector('.lb');
+    L.querySelector('img').src=im.dataset.full||im.src;L.querySelector('img').alt=im.alt;L.querySelector('p').textContent=im.alt.replace('Eco Quest: ','');
+    L.classList.add('open');L.querySelector('button').focus();
+  }));
   /* reveals */
   const els=document.querySelectorAll('.rv,#ct');
   if('IntersectionObserver' in window){
